@@ -1,6 +1,6 @@
 import React from "react";
 import { AppBar, Toolbar, Stack, Button } from "@mui/material";
-import logo from "../images/titlte-logo-ru.png";
+import logo from "../images/titlte-logo-ru-update.png";
 import {routes} from "../helpers/routes";
 import Divider from "@mui/material/Divider";
 import { useLocation } from "react-router-dom";

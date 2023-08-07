@@ -1,5 +1,5 @@
 import React, { ReactChild } from "react";
-import titleLogoRu from "../images/titlte-logo-ru.png";
+import titleLogoRu from "../images/titlte-logo-ru-update.png";
 import { Grid, Stack } from "@mui/material";
 
 const styles = {

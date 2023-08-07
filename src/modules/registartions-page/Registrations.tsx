@@ -17,7 +17,7 @@ export function Registrations() {
 
   useEffect(() => {
     dispatch(requestRegistrationsData());
-    fetchAllRegistration(0, 100)
+    fetchAllRegistration(0, 20)
       .then((data) => {
         const users = data;
         console.log(users);
