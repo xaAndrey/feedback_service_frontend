@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   requestRegistrationsData,
@@ -14,6 +14,7 @@ export function Registrations() {
   const { isFetching, payload: registrationsData, error } = useAppSelector(
     (state) => state.registrations
   );
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
     dispatch(requestRegistrationsData());
@@ -25,7 +26,17 @@ export function Registrations() {
       .catch((error) => {
         dispatch(requestRegistrationsError(error));
       });
-  }, []);
+  }, [count]);
+
+  const handleChangeCount = () => {
+    if (count === 0) {
+      setCount(1);
+    } else {
+      setCount(0);
+    }
+  }
+
+  setTimeout(handleChangeCount, 20000)
 
   return (
     <div>
