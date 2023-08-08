@@ -11,7 +11,6 @@ export const StyledTable = styled(Table)(() => ({
 export const StyledTableCell = styled(TableCell)(() => ({
     '&.MuiTableCell-root': {
         borderBottom: "none",
-        backgroundColor: '#fff',
         '&:last-child': {
             borderTopRightRadius: 15,
             borderBottomRightRadius: 15

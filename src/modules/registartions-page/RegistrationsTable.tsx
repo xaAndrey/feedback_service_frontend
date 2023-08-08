@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { TableBody, TableHead, TableRow, TablePagination, TableContainer, Checkbox } from "@mui/material";
+import { TableBody, TableHead, TableRow, TablePagination, TableContainer, Checkbox, Typography, Box } from "@mui/material";
 import { RegistrationDto, UpdateRegistrationDto } from "../../api/registrations/dto";
 import { StyledTable, StyledTableCell } from "../../components/styled/StyledTable";
 import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined"
 import ArrowDropUpOutlinedIcon from "@mui/icons-material/ArrowDropUpOutlined";
 import { updateRegistration } from "../../api/registrations/request";
+import Phone from '@mui/icons-material/Phone';
 
 export interface IRegistrationsTable {
     registrations: RegistrationDto[],
@@ -23,6 +24,28 @@ const FullNameTextStyle = {
 export const RegistrationsTable: React.FC<IRegistrationsTable> = (props) => {
     const [page, setPage] = React.useState(0);
     const [checked, setChecked] = useState(false);
+
+    const getColors = (regstration: RegistrationDto) => {
+        if (!regstration.registered) {
+            const dateReg = new Date(regstration.dateRegistration).getTime();
+            const dateNow = Date.now();
+            const diffInHours = Math.floor((dateNow - dateReg) / (1000 * 60 * 60));
+            console.log(regstration.dateRegistration, new Date(Date.now()), diffInHours);
+            
+
+            if (diffInHours < 1) {
+                return 'green'
+            }
+            else if (diffInHours >= 1 && diffInHours <= 4) {
+                return "yellow";
+            } else if (diffInHours > 4) {
+                return 'red';
+            }
+        }  else {
+            return 'white';
+        }
+    }
+
     const [rowsPerPage, setRowsPerPage] = React.useState<number>(() => {
         const saved = localStorage.getItem("rowsPerPage");
         return parseInt((saved !== null && saved !== 'NaN') ? saved : '10');
@@ -40,7 +63,7 @@ export const RegistrationsTable: React.FC<IRegistrationsTable> = (props) => {
         setChecked(!checked)
         const registration: UpdateRegistrationDto = {
             isRegistered: checked
-        }       
+        }
         updateRegistration(id, registration);
         window.location.reload();
     }
@@ -55,15 +78,18 @@ export const RegistrationsTable: React.FC<IRegistrationsTable> = (props) => {
             <StyledTable>
                 <colgroup>
                     <col style={{ width: '5%' }} />
-                    <col style={{ width: '19%' }} />
-                    <col style={{ width: '19%' }} />
-                    <col style={{ width: '19%' }} />
-                    <col style={{ width: '19%' }} />
-                    <col style={{ width: '19%' }} />
+                    <col style={{ width: '5%' }} />
+                    <col style={{ width: '18%' }} />
+                    <col style={{ width: '18%' }} />
+                    <col style={{ width: '18%' }} />
+                    <col style={{ width: '18%' }} />
+                    <col style={{ width: '18%' }} />
                 </colgroup>
 
                 <TableHead>
                     <TableRow>
+                        <StyledTableCell></StyledTableCell>
+
                         <StyledTableCell align="center">
                             <div style={{
                                 display: 'flex',
@@ -179,16 +205,20 @@ export const RegistrationsTable: React.FC<IRegistrationsTable> = (props) => {
                     {props?.registrations
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         .map((registration) => <TableRow key={registration.id}>
+                            <StyledTableCell>
+                                <Phone style={{color: getColors(registration)}}/>
+                            </StyledTableCell>
+
                             <StyledTableCell align="center" sx={FullNameTextStyle}>
                                 {registration.id}
                             </StyledTableCell>
 
                             <StyledTableCell align="center" sx={FullNameTextStyle}>
-                                {registration.fio}
+                                <Box fontWeight='bold'>{registration.fio}</Box>
                             </StyledTableCell>
 
                             <StyledTableCell align="center" sx={FullNameTextStyle}>
-                                {registration.phone}
+                                <Box fontWeight='bold'>{registration.phone}</Box>
                             </StyledTableCell>
 
                             <StyledTableCell align="center" sx={FullNameTextStyle}>
@@ -222,38 +252,4 @@ export const RegistrationsTable: React.FC<IRegistrationsTable> = (props) => {
             />}
         </TableContainer>
     );
-}
-
-export interface IregistrationsRow {
-    registration: RegistrationDto
-}
-
-export const RegistrationRow: React.FC<IregistrationsRow> = (props) => {
-    const { registration } = props;
-
-    return <TableRow>
-        <StyledTableCell align="center" sx={FullNameTextStyle}>
-            {registration.id}
-        </StyledTableCell>
-
-        <StyledTableCell align="center" sx={FullNameTextStyle}>
-            {registration.fio}
-        </StyledTableCell>
-
-        <StyledTableCell align="center" sx={FullNameTextStyle}>
-            {registration.phone}
-        </StyledTableCell>
-
-        <StyledTableCell align="center" sx={FullNameTextStyle}>
-            {registration.doctor}
-        </StyledTableCell>
-
-        <StyledTableCell align="center" sx={FullNameTextStyle}>
-            {registration.comments}
-        </StyledTableCell>
-
-        <StyledTableCell align="center">
-            {registration.registered}
-        </StyledTableCell>
-    </TableRow>
 }
