@@ -9,6 +9,6 @@ export const OvalPrimaryButton = styled(Button)<ButtonProps>(() => ({
     borderRadius: 18,
     textTransform: 'none',
     '&:hover': {
-        backgroundColor: theme.palette.primary.dark
+        backgroundColor: theme.palette.secondary.main
     }
 }));

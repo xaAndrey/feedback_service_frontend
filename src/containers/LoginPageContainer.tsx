@@ -11,10 +11,10 @@ const styles = {
 };
 
 export const LoginPageContainer = ({children}: {children: ReactChild}): JSX.Element => {
-    return <Grid sx={{backgroundColor: '#fff7ea'}} container direction={'row'} alignItems={'center'} height={'100vh'}>
+    return <Grid sx={{backgroundColor: 'white'}} container direction={'row'} alignItems={'center'} height={'100vh'}>
         <Grid item xs/>
         <Grid item xs={3}>
-            <Stack sx={{backgroundColor: '#fff7ea', borderRadius: 5, alignItems: 'center'}} direction={'column'}>
+            <Stack sx={{backgroundColor: 'white', borderRadius: 5, alignItems: 'center'}} direction={'column'}>
                 <img src={titleLogoRu} style={styles.titleLogoRu} alt={'titleLogoRu'}/>
                 {children}
             </Stack>
