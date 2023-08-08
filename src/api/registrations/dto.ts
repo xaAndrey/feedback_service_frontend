@@ -5,7 +5,7 @@ export type RegistrationDto = {
     fio: string,
     phone: string,
     doctor: string,
-    dateRegistration: string, // Date
+    dateRegistration: Date,
     registered: boolean,
     comments: string,
     owner: UserDto
