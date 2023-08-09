@@ -36,7 +36,7 @@ export function Registrations() {
     }
   }
 
-  setTimeout(handleChangeCount, 20000)
+  setTimeout(handleChangeCount, 300000)
 
   return (
     <div>
