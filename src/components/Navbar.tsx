@@ -5,6 +5,7 @@ import {routes} from "../helpers/routes";
 import Divider from "@mui/material/Divider";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+import { theme } from "../helpers/theme";
 
 
 export const Navbar = () => {
@@ -25,14 +26,14 @@ export const Navbar = () => {
             padding: '8px 30px'
         },
         button: {
-            color: '#938FB1',
+            color: theme.palette.primary.main,
             font: 'Nunito Sans',
             weight: '700',
             fontSize: '16px',
             lineHeight: '23.2px'
         },
         buttonActive: {
-            color: '#1E3567',
+            color: theme.palette.secondary.main,
             font: 'Nunito Sans',
             weight: '700',
             fontSize: '16px',
