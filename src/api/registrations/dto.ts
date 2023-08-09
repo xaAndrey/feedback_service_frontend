@@ -8,6 +8,7 @@ export type RegistrationDto = {
     dateRegistration: Date,
     registered: boolean,
     comments: string,
+    date: Date,
     owner: UserDto
 }
 

@@ -79,11 +79,12 @@ export const RegistrationsTable: React.FC<IRegistrationsTable> = (props) => {
                 <colgroup>
                     <col style={{ width: '5%' }} />
                     <col style={{ width: '5%' }} />
-                    <col style={{ width: '18%' }} />
-                    <col style={{ width: '18%' }} />
-                    <col style={{ width: '18%' }} />
-                    <col style={{ width: '18%' }} />
-                    <col style={{ width: '18%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '15%' }} />
+                    <col style={{ width: '15%' }} />
                 </colgroup>
 
                 <TableHead>
@@ -169,6 +170,24 @@ export const RegistrationsTable: React.FC<IRegistrationsTable> = (props) => {
                                 justifyContent: 'center',
                                 alignItems: 'center'
                             }}
+                                onClick={() => props.handleSort('date')}>
+                                <span>Дата пользователя</span>
+                                {props.columnToSort === 'date' ? (
+                                    props.sortDirection === 'asc' ? (
+                                        <ArrowDropUpOutlinedIcon />
+                                    ) : (
+                                        <ArrowDropDownOutlinedIcon />
+                                    )
+                                ) : null}
+                            </div>
+                        </StyledTableCell>
+
+                        <StyledTableCell align="center">
+                            <div style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                            }}
                                 onClick={() => props.handleSort('comment')}>
                                 <span>Комментарий</span>
                                 {props.columnToSort === 'comment' ? (
@@ -223,6 +242,10 @@ export const RegistrationsTable: React.FC<IRegistrationsTable> = (props) => {
 
                             <StyledTableCell align="center" sx={FullNameTextStyle}>
                                 {registration.doctor}
+                            </StyledTableCell>
+
+                            <StyledTableCell align="center" sx={FullNameTextStyle}>
+                                {new Date(registration.date).toLocaleDateString()}
                             </StyledTableCell>
 
                             <StyledTableCell align="center" sx={FullNameTextStyle}>
