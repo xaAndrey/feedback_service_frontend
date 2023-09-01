@@ -6,12 +6,15 @@ import ArrowDropDownOutlinedIcon from "@mui/icons-material/ArrowDropDownOutlined
 import ArrowDropUpOutlinedIcon from "@mui/icons-material/ArrowDropUpOutlined";
 import { updateRegistration } from "../../api/registrations/request";
 import Phone from '@mui/icons-material/Phone';
+import { routes } from "../../helpers/routes";
+import { useNavigate } from "react-router-dom";
 
 export interface IRegistrationsTable {
     registrations: RegistrationDto[],
     handleSort: Function,
     columnToSort: string,
-    sortDirection: 'asc' | 'desc'
+    sortDirection: 'asc' | 'desc',
+    setValue: Function
 }
 
 const FullNameTextStyle = {
@@ -24,6 +27,7 @@ const FullNameTextStyle = {
 export const RegistrationsTable: React.FC<IRegistrationsTable> = (props) => {
     const [page, setPage] = React.useState(0);
     const [checked, setChecked] = useState(false);
+    const navigate = useNavigate();
 
     const getColors = (regstration: RegistrationDto) => {
         if (!regstration.registered) {
@@ -59,13 +63,13 @@ export const RegistrationsTable: React.FC<IRegistrationsTable> = (props) => {
         setPage(newPage);
     }
 
-    const handleChecked = (id: number, checked: boolean) => {
+    const handleChecked = async (id: number, checked: boolean) => {
         setChecked(!checked)
         const registration: UpdateRegistrationDto = {
             isRegistered: checked
         }
-        updateRegistration(id, registration);
-        window.location.reload();
+        await updateRegistration(id, registration);
+        props.setValue({});
     }
 
     const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {

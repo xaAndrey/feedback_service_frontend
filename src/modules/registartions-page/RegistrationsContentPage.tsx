@@ -6,10 +6,11 @@ import {orderBy} from "lodash";
 
 export interface IRegistrationsContentPage {
     registrations: RegistrationDto[],
-    isFetching: boolean
+    isFetching: boolean,
+    setValue: Function
 }
 
-export const RegistrationsContentPage: React.FC<IRegistrationsContentPage> = ({ registrations, isFetching }) => {
+export const RegistrationsContentPage: React.FC<IRegistrationsContentPage> = ({ registrations, isFetching, setValue }) => {
     const [columnToSort, setColumnToSort] = useState('id');
     const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>("desc");
 
@@ -42,7 +43,8 @@ export const RegistrationsContentPage: React.FC<IRegistrationsContentPage> = ({ 
                                 registrations={orderBy(registrations, columnToSort, sortDirection)}
                                 handleSort={handleSort}
                                 columnToSort={columnToSort}
-                                sortDirection={sortDirection} /> 
+                                sortDirection={sortDirection}
+                                setValue={setValue} /> 
                                 }
                         </>
                     }

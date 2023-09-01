@@ -15,6 +15,7 @@ export function Registrations() {
     (state) => state.registrations
   );
   const [count, setCount] = useState(0);
+  const [value, setValue] = useState();
 
   useEffect(() => {
     dispatch(requestRegistrationsData());
@@ -26,7 +27,7 @@ export function Registrations() {
       .catch((error) => {
         dispatch(requestRegistrationsError(error));
       });
-  }, [count]);
+  }, [count, value]);
 
   const handleChangeCount = () => {
     if (count === 0) {
@@ -47,6 +48,7 @@ export function Registrations() {
         <RegistrationsContentPage
           registrations={registrationsData}
           isFetching={isFetching}
+          setValue={setValue}
         />
       ) : (
         <div>No data yet</div>
