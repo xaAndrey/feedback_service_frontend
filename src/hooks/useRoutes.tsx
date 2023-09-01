@@ -8,9 +8,9 @@ export const useRoutes = () => {
 
     return (
         <Routes>
-            <Route path={routes.home} element={<Registrations />} />
             <Route path="/" element={<Navigate to={routes.login} />} />
             <Route path={routes.login} element={<LoginPage />} />
+            <Route path={routes.registrations} element={<Registrations />} />
             <Route path="*" element={<NotFoundPage />} />
         </Routes>
     );

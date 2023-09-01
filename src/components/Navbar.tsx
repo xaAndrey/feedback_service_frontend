@@ -58,11 +58,11 @@ export const Navbar = () => {
                     </Stack>
 
                     <Stack direction="row" spacing={2}>
-                        <Button href={routes.home} style={location.pathname === routes.home ? styles.buttonActive : styles.button}>ЗАПИСИ РЕГИСТРАЦИИ</Button>
+                        <Button href={routes.registrations} style={location.pathname === routes.registrations ? styles.buttonActive : styles.button}>ЗАПИСИ РЕГИСТРАЦИИ</Button>
                     </Stack>
 
                     <Stack direction='row'>
-                        <Button href={'/login'} onClick={exitForUser} style={styles.buttonExit}>Выйти</Button>
+                        <Button href={routes.login} onClick={exitForUser} style={styles.buttonExit}>Выйти</Button>
                     </Stack>
                 </Stack>
             </Toolbar>

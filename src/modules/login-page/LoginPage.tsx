@@ -10,6 +10,7 @@ import { Container, IconButton, InputAdornment, Box } from "@mui/material";
 import { OvalTextField } from "../../components/styled/OvalTextField";
 import { WarningParagraph } from "../../components/styled/WarningParagraph";
 import { OvalPrimaryButton } from "../../components/styled/OvalPrimaryButton";
+import { routes } from "../../helpers/routes";
 
 const LoginForm = (): JSX.Element => {
     const [form, setForm] = useState({ login: "", password: "" });
@@ -33,7 +34,7 @@ const LoginForm = (): JSX.Element => {
             cookies.set(ACCESS_TOKEN_EXPIRATION_TIME_COOKIE_KEY, (new Date()).getTime() + response.accessTokenExpirationTime - 1000);
             cookies.set(REFRESH_TOKEN_COOKIE_KEY, response.refreshToken);
             cookies.set(REFRESH_TOKEN_EXPIRATION_TIME_COOKIE_KEY, (new Date()).getTime() + response.refreshTokenExpirationTime - 1000);
-            navigate('/home');
+            navigate(routes.registrations);
         } else {
             setAuthError(true);
         }
